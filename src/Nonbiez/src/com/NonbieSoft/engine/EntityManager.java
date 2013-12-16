@@ -10,8 +10,8 @@ public class EntityManager {
 	public HashMap<String, List<Entity>> tagHashMap = new HashMap<String, 
 			List<Entity>>();
 	
-	public HashMap<Class<?>, HashMap<Entity, List<Component>>> componentHashMap 
-	= new HashMap<Class<?>, HashMap<Entity, List<Component>>>();
+	public HashMap<Class<?>, HashMap<Entity, List<IComponent>>> componentHashMap 
+	= new HashMap<Class<?>, HashMap<Entity, List<IComponent>>>();
 
 	
 	public Entity createEntity(String name, String tag) {
@@ -43,23 +43,23 @@ public class EntityManager {
 
 	
 	
-	public void addComponentToEntity(Entity newEntity, Component comp) {
+	public void addComponentToEntity(Entity newEntity, IComponent comp) {
 		if (!componentHashMap.containsKey(comp.getClass()))
 			componentHashMap.put(comp.getClass(),
-					new HashMap<Entity, List<Component>>());
+					new HashMap<Entity, List<IComponent>>());
 
-		HashMap<Entity, List<Component>> tempMap = componentHashMap.get(comp
+		HashMap<Entity, List<IComponent>> tempMap = componentHashMap.get(comp
 				.getClass());
 
 		if (!tempMap.containsKey(newEntity)) {
-			tempMap.put(newEntity, new LinkedList<Component>());
+			tempMap.put(newEntity, new LinkedList<IComponent>());
 		}
 		tempMap.get(newEntity).add(comp);
 	}
 
 	
 	
-	public void removeComponentFromEntity(Entity newEntity, Component comp) {
+	public void removeComponentFromEntity(Entity newEntity, IComponent comp) {
 		if (componentHashMap.containsKey(comp.getClass())){
 			if(componentHashMap.get(comp.getClass()).containsKey(newEntity)){
 				componentHashMap.get(comp.getClass()).get(newEntity).remove(comp);
@@ -69,7 +69,7 @@ public class EntityManager {
 	}
 	
 	
-	public List<Component> getComponents(Entity newEntity, Component comp){
+	public List<IComponent> getComponents(Entity newEntity, IComponent comp){
 		if (componentHashMap.containsKey(comp.getClass())){
 			if(componentHashMap.get(comp.getClass()).containsKey(newEntity)){
 					return componentHashMap.get(comp.getClass()).get(newEntity);

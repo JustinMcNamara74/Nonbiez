@@ -1,5 +1,6 @@
 package com.NonbieSoft.nonbiez;
 
+import com.NonbieSoft.engine.*;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -15,6 +16,8 @@ public class NonbiezGame implements ApplicationListener {
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
+	
+	private EntityManager em;
 	
 	@Override
 	public void create() {		
@@ -33,6 +36,15 @@ public class NonbiezGame implements ApplicationListener {
 		sprite.setSize(0.9f, 0.9f * sprite.getHeight() / sprite.getWidth());
 		sprite.setOrigin(sprite.getWidth()/2, sprite.getHeight()/2);
 		sprite.setPosition(-sprite.getWidth()/2, -sprite.getHeight()/2);
+		
+		
+		em = new EntityManager();
+		
+		
+	}
+	
+	public void spawnPlayer() {
+		
 	}
 
 	@Override
@@ -45,6 +57,8 @@ public class NonbiezGame implements ApplicationListener {
 	public void render() {		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+		
+		
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
