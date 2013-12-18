@@ -1,12 +1,12 @@
 package com.NonbieSoft.nonbiez;
 
+import com.NonbieSoft.engine.Entity;
 import com.NonbieSoft.engine.EntityManager;
 import com.NonbieSoft.nonbiez.systems.PhysicsSystem;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class NonbiezGame implements ApplicationListener {
@@ -33,6 +33,7 @@ public class NonbiezGame implements ApplicationListener {
 	}
 	
 	public void spawnPlayer() {
+		Entity player = em.createEntity("Player1", "player");
 		
 	}
 

@@ -15,7 +15,7 @@ public class EntityManager {
 
 	
 	public Entity createEntity(String name, String tag) {
-		Entity newEntity = new Entity(name, tag);
+		Entity newEntity = new Entity(name, tag, this);
 
 		// Check if tag exists in hashmap
 		if (!tagHashMap.containsKey(tag)) {
@@ -67,10 +67,10 @@ public class EntityManager {
 	}
 	
 	
-	public List<IComponent> getComponents(Entity newEntity, IComponent comp){
-		if (componentHashMap.containsKey(comp.getClass())){
-			if(componentHashMap.get(comp.getClass()).containsKey(newEntity)){
-					return componentHashMap.get(comp.getClass()).get(newEntity);
+	public List<IComponent> getComponents(Entity newEntity, Class<?> type){
+		if (componentHashMap.containsKey(type)){
+			if(componentHashMap.get(type).containsKey(newEntity)){
+					return componentHashMap.get(type).get(newEntity);
 			}
 		}
 		return null;
