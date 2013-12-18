@@ -1,5 +1,11 @@
 package com.NonbieSoft.engine;
 
-public class EntitySystem {
-
+abstract public class EntitySystem {
+	protected EntityManager _em;
+	
+	public EntitySystem(EntityManager em) {
+		_em = em;
+	}
+	
+	abstract public void update(float dt);
 }

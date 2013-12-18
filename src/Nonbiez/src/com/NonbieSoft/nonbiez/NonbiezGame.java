@@ -1,22 +1,23 @@
 package com.NonbieSoft.nonbiez;
 
-import com.NonbieSoft.engine.*;
+import com.NonbieSoft.engine.EntityManager;
+import com.NonbieSoft.nonbiez.systems.PhysicsSystem;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class NonbiezGame implements ApplicationListener {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private Sprite sprite;
 	
 	private EntityManager em;
+	
+	// System declarations go here!
+	private PhysicsSystem physicsSystem;
+	
 	
 	@Override
 	public void create() {		
@@ -28,7 +29,7 @@ public class NonbiezGame implements ApplicationListener {
 		
 		em = new EntityManager();
 		
-		
+		physicsSystem = new PhysicsSystem(em);
 	}
 	
 	public void spawnPlayer() {
@@ -42,6 +43,9 @@ public class NonbiezGame implements ApplicationListener {
 
 	@Override
 	public void render() {		
+		
+		physicsSystem.update(Gdx.graphics.getDeltaTime());
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 

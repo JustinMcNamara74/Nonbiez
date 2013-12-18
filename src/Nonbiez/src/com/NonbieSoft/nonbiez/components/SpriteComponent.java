@@ -1,4 +1,4 @@
-package com.NonbieSoft.nonbiez;
+package com.NonbieSoft.nonbiez.components;
 
 import com.NonbieSoft.engine.IComponent;
 import com.badlogic.gdx.Gdx;
@@ -14,7 +14,7 @@ public class SpriteComponent implements IComponent {
 	public Texture texture;
 	
 	public SpriteComponent(String fileName, Batch batch) {
-		texture = new Texture(Gdx.files.local(fileName));
+		texture = new Texture(Gdx.files.internal(fileName));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		TextureRegion region = new TextureRegion(texture, 0, 0, 512, 275);
