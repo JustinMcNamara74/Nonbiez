@@ -33,7 +33,7 @@ public class PhysicsSystem extends EntitySystem {
 				
 				// Do the simple physics!
 				phys.step(dt);
-				transform.position.add(phys.velocity.scl(dt));
+				transform.position.add(phys.velocity.x*dt, phys.velocity.y*dt);
 			}
 		}
 	}

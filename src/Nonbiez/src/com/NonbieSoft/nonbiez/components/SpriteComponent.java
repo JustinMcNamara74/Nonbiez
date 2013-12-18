@@ -4,8 +4,8 @@ import com.NonbieSoft.engine.IComponent;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 
 
 /*
@@ -14,24 +14,18 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class SpriteComponent implements IComponent {
 	public Sprite sprite;
-	public Batch batch;
 	public Texture texture;
-	
-	public SpriteComponent(String fileName, Batch batch) {
-		this.batch = batch;
-		
+
+	public SpriteComponent(String fileName) {
 		texture = new Texture(Gdx.files.internal(fileName));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(texture);
-		sprite.setSize(64f, 64f);
-		sprite.setPosition(50f, 50f);
 	}
 	
-	// Added render method to make things easier
-	public void render() {
-		sprite.draw(batch);
+	public void setDrawPosition(Vector2 v) {
+		sprite.setPosition(v.x - sprite.getWidth()/2, v.y - sprite.getHeight()/2);
 	}
-
+	
 	@Override
 	public void dispose() {
 		texture.dispose();

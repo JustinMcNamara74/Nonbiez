@@ -17,7 +17,7 @@ public class PhysicsComponent implements IComponent {
 	}
 	
 	public void step(float dt) {
-		velocity.add(accel.scl(dt));
+		velocity.add(accel.x*dt, accel.y*dt);
 	}
 
 	@Override

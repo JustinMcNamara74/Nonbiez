@@ -25,13 +25,13 @@ public class NonbiezGame implements ApplicationListener {
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 		
-		camera = new OrthographicCamera(1, h/w);
+		camera = new OrthographicCamera(w, h);
 		batch = new SpriteBatch();
 		
 		em = new EntityManager();
 		
 		physicsSystem = new PhysicsSystem(em);
-		renderSystem = new RenderSystem(em);
+		renderSystem = new RenderSystem(em, batch);
 		
 		spawnPlayer();
 	}
@@ -43,13 +43,15 @@ public class NonbiezGame implements ApplicationListener {
 		player.addComponent(new TransformComponent());
 		
 		// Give this Entity a sprite to render itself with
-		player.addComponent(new SpriteComponent("data/evolutio.png", batch));
+		SpriteComponent spr = (SpriteComponent)player.addComponent(new SpriteComponent("data/evolutio.png"));
+		spr.sprite.setRotation(-90f);
 		
 		// Make this Entity physics-enabled!
-		//PhysicsComponent phys = (PhysicsComponent)player.addComponent(new PhysicsComponent());
+		PhysicsComponent phys = new PhysicsComponent();
+		player.addComponent(phys);
 		
 		// Give it some gravity
-		//phys.accel.set(0.0f, -9.81f);
+		phys.accel.set(0.0f, -98.10f);
 		
 		// Now that the entity has a PhysicsComponent, the PhysicsSystem
 		// will pick it up and start working it.
@@ -72,7 +74,7 @@ public class NonbiezGame implements ApplicationListener {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		
-		renderSystem.update(0f);
+		renderSystem.update(Gdx.graphics.getDeltaTime());
 		
 		batch.end();
 	}
