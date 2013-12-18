@@ -18,7 +18,7 @@ public class NonbiezGame implements ApplicationListener {
 	
 	// System declarations go here!
 	private PhysicsSystem physicsSystem;
-	
+	private RenderSystem renderSystem;
 	
 	@Override
 	public void create() {		
@@ -31,16 +31,28 @@ public class NonbiezGame implements ApplicationListener {
 		em = new EntityManager();
 		
 		physicsSystem = new PhysicsSystem(em);
+		renderSystem = new RenderSystem(em);
+		
+		spawnPlayer();
 	}
 	
 	public void spawnPlayer() {
 		Entity player = em.createEntity("Player1", "player");
 		
-		// Give this component position, scale, and rotation properties
+		// Give this Entity position, scale, and rotation properties
 		player.addComponent(new TransformComponent());
 		
-		// Give this component a sprite to render itself with
+		// Give this Entity a sprite to render itself with
 		player.addComponent(new SpriteComponent("data/evolutio.png", batch));
+		
+		// Make this Entity physics-enabled!
+		PhysicsComponent phys = (PhysicsComponent)player.addComponent(new PhysicsComponent());
+		
+		// Give it some gravity
+		phys.accel.set(0.0f, -9.81f);
+		
+		// Now that the entity has a PhysicsComponent, the PhysicsSystem
+		// will pick it up and start working it.
 	}
 
 	@Override
@@ -58,6 +70,8 @@ public class NonbiezGame implements ApplicationListener {
 
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		
+		renderSystem.update(0f);
 		
 		batch.end();
 	}

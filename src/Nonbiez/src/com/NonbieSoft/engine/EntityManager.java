@@ -2,7 +2,6 @@ package com.NonbieSoft.engine;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 public class EntityManager {
@@ -68,10 +67,11 @@ public class EntityManager {
 		
 	}
 	
-	public IComponent getComponent(Entity entity, Class<?> type) {
+	@SuppressWarnings("unchecked")
+	public <T extends IComponent> T getComponent(Entity entity, Class<? extends IComponent> type) {
 		if (componentHashMap.containsKey(type)){
 			if(componentHashMap.get(type).containsKey(entity)){
-					return componentHashMap.get(type).get(entity).getFirst();
+					return (T)componentHashMap.get(type).get(entity).getFirst();
 			}
 		}
 		return null;

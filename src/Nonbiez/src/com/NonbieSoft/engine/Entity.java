@@ -19,8 +19,9 @@ public class Entity {
 		return _em.addComponentToEntity(this, comp);
 	}
 	
-	public IComponent getComponent(Class<?> componentType) {
-		return _em.getComponent(this, componentType);
+	@SuppressWarnings("unchecked")
+	public <T extends IComponent> T getComponent(Class<? extends IComponent> componentType) {
+		return (T) _em.getComponent(this, componentType);
 	}
 	
 	public LinkedList<IComponent> getComponents(Class<?> componentType) {
