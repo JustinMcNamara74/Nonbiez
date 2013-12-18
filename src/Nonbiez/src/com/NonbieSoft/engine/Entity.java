@@ -15,8 +15,8 @@ public class Entity {
 		this._em = _em;
 	}
 
-	public void addComponent(IComponent comp) {
-		_em.addComponentToEntity(this, comp);
+	public IComponent addComponent(IComponent comp) {
+		return _em.addComponentToEntity(this, comp);
 	}
 	
 	public List<IComponent> getComponents(Class<?> componentType) {

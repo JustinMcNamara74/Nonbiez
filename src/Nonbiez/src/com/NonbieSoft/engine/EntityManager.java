@@ -41,7 +41,7 @@ public class EntityManager {
 
 	
 	
-	public void addComponentToEntity(Entity newEntity, IComponent comp) {
+	public IComponent addComponentToEntity(Entity newEntity, IComponent comp) {
 		if (!componentHashMap.containsKey(comp.getClass()))
 			componentHashMap.put(comp.getClass(),
 					new HashMap<Entity, List<IComponent>>());
@@ -53,6 +53,8 @@ public class EntityManager {
 			tempMap.put(newEntity, new LinkedList<IComponent>());
 		}
 		tempMap.get(newEntity).add(comp);
+		
+		return comp;
 	}
 
 	

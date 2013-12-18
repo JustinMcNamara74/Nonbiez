@@ -35,6 +35,8 @@ public class NonbiezGame implements ApplicationListener {
 	public void spawnPlayer() {
 		Entity player = em.createEntity("Player1", "player");
 		
+		player.addComponent(new TransformComponent());
+		
 	}
 
 	@Override
