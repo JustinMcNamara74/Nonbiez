@@ -1,7 +1,10 @@
 package com.NonbieSoft.engine;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class EntityManager {
@@ -94,5 +97,24 @@ public class EntityManager {
 		
 		return null;
 		
+	}
+	
+	
+	// Calls dispose() on all components
+	@SuppressWarnings("rawtypes")
+	public void dispose() {
+		Iterator it = componentHashMap.values().iterator();
+		
+		while (it.hasNext()) {
+			Iterator entIt = ((Map)it.next()).values().iterator();
+			
+			while(entIt.hasNext()) {
+				Iterator compIt = ((List)entIt.next()).iterator();
+				
+				while(compIt.hasNext()) {
+					((IComponent)compIt.next()).dispose();
+				}
+			}
+		}
 	}
 }

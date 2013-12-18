@@ -17,4 +17,10 @@ public class TransformComponent implements IComponent {
 		scale = new Vector2(1f, 1f);
 		angle = 0f;
 	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -46,10 +46,10 @@ public class NonbiezGame implements ApplicationListener {
 		player.addComponent(new SpriteComponent("data/evolutio.png", batch));
 		
 		// Make this Entity physics-enabled!
-		PhysicsComponent phys = (PhysicsComponent)player.addComponent(new PhysicsComponent());
+		//PhysicsComponent phys = (PhysicsComponent)player.addComponent(new PhysicsComponent());
 		
 		// Give it some gravity
-		phys.accel.set(0.0f, -9.81f);
+		//phys.accel.set(0.0f, -9.81f);
 		
 		// Now that the entity has a PhysicsComponent, the PhysicsSystem
 		// will pick it up and start working it.
@@ -58,6 +58,7 @@ public class NonbiezGame implements ApplicationListener {
 	@Override
 	public void dispose() {
 		batch.dispose();
+		em.dispose();
 	}
 
 	@Override

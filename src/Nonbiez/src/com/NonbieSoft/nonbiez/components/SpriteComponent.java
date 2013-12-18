@@ -18,13 +18,22 @@ public class SpriteComponent implements IComponent {
 	public Texture texture;
 	
 	public SpriteComponent(String fileName, Batch batch) {
+		this.batch = batch;
+		
 		texture = new Texture(Gdx.files.internal(fileName));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		sprite = new Sprite(texture);
+		sprite.setSize(64f, 64f);
+		sprite.setPosition(50f, 50f);
 	}
 	
 	// Added render method to make things easier
 	public void render() {
 		sprite.draw(batch);
+	}
+
+	@Override
+	public void dispose() {
+		texture.dispose();
 	}
 }
