@@ -7,11 +7,11 @@ import java.util.Set;
 
 public class EntityManager {
 	
-	public HashMap<String, List<Entity>> tagHashMap = new HashMap<String, 
-			List<Entity>>();
+	public HashMap<String, LinkedList<Entity>> tagHashMap = new HashMap<String, 
+			LinkedList<Entity>>();
 	
-	public HashMap<Class<?>, HashMap<Entity, List<IComponent>>> componentHashMap =
-			new HashMap<Class<?>, HashMap<Entity, List<IComponent>>>();
+	public HashMap<Class<?>, HashMap<Entity, LinkedList<IComponent>>> componentHashMap =
+			new HashMap<Class<?>, HashMap<Entity, LinkedList<IComponent>>>();
 
 	
 	public Entity createEntity(String name, String tag) {
@@ -44,9 +44,9 @@ public class EntityManager {
 	public IComponent addComponentToEntity(Entity newEntity, IComponent comp) {
 		if (!componentHashMap.containsKey(comp.getClass()))
 			componentHashMap.put(comp.getClass(),
-					new HashMap<Entity, List<IComponent>>());
+					new HashMap<Entity, LinkedList<IComponent>>());
 
-		HashMap<Entity, List<IComponent>> tempMap = componentHashMap.get(comp
+		HashMap<Entity, LinkedList<IComponent>> tempMap = componentHashMap.get(comp
 				.getClass());
 
 		if (!tempMap.containsKey(newEntity)) {
@@ -68,15 +68,22 @@ public class EntityManager {
 		
 	}
 	
+	public IComponent getComponent(Entity entity, Class<?> type) {
+		if (componentHashMap.containsKey(type)){
+			if(componentHashMap.get(type).containsKey(entity)){
+					return componentHashMap.get(type).get(entity).getFirst();
+			}
+		}
+		return null;
+	}
 	
-	public List<IComponent> getComponents(Entity newEntity, Class<?> type){
+	public LinkedList<IComponent> getComponents(Entity newEntity, Class<?> type){
 		if (componentHashMap.containsKey(type)){
 			if(componentHashMap.get(type).containsKey(newEntity)){
 					return componentHashMap.get(type).get(newEntity);
 			}
 		}
 		return null;
-		
 	}
 	
 	

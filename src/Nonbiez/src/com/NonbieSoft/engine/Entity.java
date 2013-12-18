@@ -1,6 +1,6 @@
 package com.NonbieSoft.engine;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class Entity {
 
@@ -19,7 +19,11 @@ public class Entity {
 		return _em.addComponentToEntity(this, comp);
 	}
 	
-	public List<IComponent> getComponents(Class<?> componentType) {
+	public IComponent getComponent(Class<?> componentType) {
+		return _em.getComponent(this, componentType);
+	}
+	
+	public LinkedList<IComponent> getComponents(Class<?> componentType) {
 		return _em.getComponents(this, componentType);
 	}
 }

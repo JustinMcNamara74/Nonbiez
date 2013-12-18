@@ -1,10 +1,14 @@
 package com.NonbieSoft.nonbiez.systems;
 
-import com.NonbieSoft.engine.EntityManager;
-import com.NonbieSoft.engine.EntitySystem;
+import java.util.Set;
+
+import com.NonbieSoft.engine.*;
+import com.NonbieSoft.nonbiez.components.*;
+
 
 public class PhysicsSystem extends EntitySystem {
 
+	private Set<Entity> entSet;
 	
 	public PhysicsSystem(EntityManager em) {
 		super(em);
@@ -12,7 +16,11 @@ public class PhysicsSystem extends EntitySystem {
 
 	@Override
 	public void update(float dt) {
+		entSet = _em.getEntitiesByComponentType(PhysicsComponent.class);
 		
+		for(Entity ent : entSet) {
+			
+		}
 	}
 
 }

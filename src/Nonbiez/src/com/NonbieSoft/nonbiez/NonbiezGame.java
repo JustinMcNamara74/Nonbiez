@@ -1,8 +1,9 @@
 package com.NonbieSoft.nonbiez;
 
-import com.NonbieSoft.engine.Entity;
-import com.NonbieSoft.engine.EntityManager;
-import com.NonbieSoft.nonbiez.systems.PhysicsSystem;
+import com.NonbieSoft.engine.*;
+import com.NonbieSoft.nonbiez.components.*;
+import com.NonbieSoft.nonbiez.systems.*;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -35,8 +36,11 @@ public class NonbiezGame implements ApplicationListener {
 	public void spawnPlayer() {
 		Entity player = em.createEntity("Player1", "player");
 		
+		// Give this component position, scale, and rotation properties
 		player.addComponent(new TransformComponent());
 		
+		// Give this component a sprite to render itself with
+		player.addComponent(new SpriteComponent("data/evolutio.png", batch));
 	}
 
 	@Override
