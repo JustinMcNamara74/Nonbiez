@@ -10,8 +10,8 @@ public class EntityManager {
 	public HashMap<String, List<Entity>> tagHashMap = new HashMap<String, 
 			List<Entity>>();
 	
-	public HashMap<Class<?>, HashMap<Entity, List<IComponent>>> componentHashMap 
-	= new HashMap<Class<?>, HashMap<Entity, List<IComponent>>>();
+	public HashMap<Class<?>, HashMap<Entity, List<IComponent>>> componentHashMap =
+			new HashMap<Class<?>, HashMap<Entity, List<IComponent>>>();
 
 	
 	public Entity createEntity(String name, String tag) {
@@ -37,8 +37,6 @@ public class EntityManager {
 				componentHashMap.get(t).remove(en);
 			}
 		}
-		
-		
 	}
 
 	
@@ -88,7 +86,4 @@ public class EntityManager {
 		return null;
 		
 	}
-	
-	
-
 }

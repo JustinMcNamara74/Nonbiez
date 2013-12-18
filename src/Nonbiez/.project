@@ -3,6 +3,7 @@
 	<name>Nonbiez</name>
 	<comment></comment>
 	<projects>
+		<project>Nonbiez-desktop</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

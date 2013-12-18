@@ -1,5 +1,5 @@
 package com.NonbieSoft.engine;
 
-public interface ISystem {
+public class EntitySystem {
 
 }
