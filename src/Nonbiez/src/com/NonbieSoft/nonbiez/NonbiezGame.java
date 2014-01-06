@@ -6,9 +6,12 @@ import com.NonbieSoft.nonbiez.systems.*;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class NonbiezGame implements ApplicationListener {
 	private OrthographicCamera camera;
@@ -19,6 +22,9 @@ public class NonbiezGame implements ApplicationListener {
 	// System declarations go here!
 	private PhysicsSystem physicsSystem;
 	private RenderSystem renderSystem;
+	private PathFindingSystem pathfindingSystem;
+	
+	private Entity player1;
 	
 	@Override
 	public void create() {		
@@ -26,17 +32,19 @@ public class NonbiezGame implements ApplicationListener {
 		float h = Gdx.graphics.getHeight();
 		
 		camera = new OrthographicCamera(w, h);
+		
 		batch = new SpriteBatch();
 		
 		em = new EntityManager();
 		
 		physicsSystem = new PhysicsSystem(em);
 		renderSystem = new RenderSystem(em, batch);
+		pathfindingSystem = new PathFindingSystem(em);
 		
-		spawnPlayer();
+		player1 = spawnPlayer();
 	}
 	
-	public void spawnPlayer() {
+	public Entity spawnPlayer() {
 		Entity player = em.createEntity("Player1", "player");
 		
 		// Give this Entity position, scale, and rotation properties
@@ -50,11 +58,18 @@ public class NonbiezGame implements ApplicationListener {
 		PhysicsComponent phys = new PhysicsComponent();
 		player.addComponent(phys);
 		
+		// Add Pathfinding capability
+		PathFinderComponent pf = new PathFinderComponent(100);
+		player.addComponent(pf);
+		pf.targetPosition = new Vector2(50,50);
+		
 		// Give it some gravity
-		phys.accel.set(0.0f, -98.10f);
+		// phys.accel.set(0.0f, -98.10f);
 		
 		// Now that the entity has a PhysicsComponent, the PhysicsSystem
 		// will pick it up and start working it.
+		
+		return player;
 	}
 
 	@Override
@@ -66,7 +81,20 @@ public class NonbiezGame implements ApplicationListener {
 	@Override
 	public void render() {		
 		
+		pathfindingSystem.update(Gdx.graphics.getDeltaTime());
+		
 		physicsSystem.update(Gdx.graphics.getDeltaTime());
+		
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+			Vector3 tempVec = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0f);
+			
+			camera.unproject(tempVec);
+			
+	        System.out.println(tempVec.x + " " + tempVec.y);
+	        
+	        PathFinderComponent pf = player1.getComponent(PathFinderComponent.class);
+	        pf.targetPosition = new Vector2(tempVec.x, tempVec.y);
+	    }
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -75,6 +103,8 @@ public class NonbiezGame implements ApplicationListener {
 		batch.begin();
 		
 		renderSystem.update(Gdx.graphics.getDeltaTime());
+		
+		
 		
 		batch.end();
 	}
