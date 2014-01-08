@@ -1,7 +1,8 @@
 package com.NonbieSoft.nonbiez.components;
 
-import com.NonbieSoft.engine.*;
+import com.NonbieSoft.engine.IComponent;
 import com.badlogic.gdx.math.Vector2;
+
 
 /*
  * The PhysicsComponent enables velocity and acceleration for

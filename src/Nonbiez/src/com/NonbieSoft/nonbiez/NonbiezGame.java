@@ -104,8 +104,6 @@ public class NonbiezGame implements ApplicationListener {
 		
 		renderSystem.update(Gdx.graphics.getDeltaTime());
 		
-		
-		
 		batch.end();
 	}
 
