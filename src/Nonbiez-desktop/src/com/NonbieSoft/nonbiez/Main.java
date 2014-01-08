@@ -11,6 +11,8 @@ public class Main {
 		cfg.width = 640;
 		cfg.height = 480;
 		
+		// random change
+
 		new LwjglApplication(new NonbiezGame(), cfg);
 	}
 }
