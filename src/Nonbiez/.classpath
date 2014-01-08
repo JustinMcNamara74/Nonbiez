@@ -8,5 +8,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="libs/tween-engine-api.jar" sourcepath="libs/tween-engine-api-sources.jar"/>
+	<classpathentry kind="lib" path="libs/quick-json-1.0.2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
