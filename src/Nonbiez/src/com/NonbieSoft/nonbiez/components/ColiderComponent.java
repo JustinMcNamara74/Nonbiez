@@ -2,7 +2,6 @@ package com.NonbieSoft.nonbiez.components;
 
 import com.NonbieSoft.engine.IComponent;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 
 public class ColiderComponent implements IComponent {
 	public Rectangle bounds;
