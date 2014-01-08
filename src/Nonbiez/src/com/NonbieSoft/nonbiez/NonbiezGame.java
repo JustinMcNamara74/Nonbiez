@@ -42,6 +42,12 @@ public class NonbiezGame implements ApplicationListener {
 		pathfindingSystem = new PathFindingSystem(em);
 		
 		player1 = spawnPlayer();
+		
+		
+		//testies
+		Entity map1 = em.createEntity("quotes", "yep");
+		
+		map1.addComponent(new TileMapComponent("testmap1.json"));
 	}
 	
 	public Entity spawnPlayer() {
