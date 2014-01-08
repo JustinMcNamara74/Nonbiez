@@ -11,6 +11,7 @@ public class ColiderComponent implements IComponent {
 	public ColiderComponent(float offsetX, float offsetY, float width, float height){
 		bounds = new Rectangle(offsetX, offsetY, width, height);
 		
+		bounds = new Rectangle(0, 0, 0, 0);
 	}
 
 	@Override
