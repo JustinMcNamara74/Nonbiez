@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.json.parsers.JSONParser;
 import com.json.parsers.JsonParserFactory;
 
@@ -32,39 +34,12 @@ public class JSONLoader {
 	
 	@SuppressWarnings("rawtypes")
 	public static Map loadFile(String fileName) {
-		try{
+	
 		JsonParserFactory factory=JsonParserFactory.getInstance();
 		JSONParser parser=factory.newJsonParser();
-		return parser.parseJson(readFileAsString(fileName));
-		}
-		catch(IOException e){
-			e.printStackTrace();
-			
-		}
-		return null;
+		FileHandle file = Gdx.files.internal(fileName);
+		return parser.parseJson(file.readString());
+		
 	}
-	
-	// reads in a file path as a string to send to the parseJson
-	public static String readFileAsString(String filePath) throws IOException {
-        StringBuffer fileData = new StringBuffer();
-        BufferedReader reader = new BufferedReader(
-                new FileReader(filePath));
-        char[] buf = new char[1024];
-        int numRead=0;
-        while((numRead=reader.read(buf)) != -1){
-            String readData = String.valueOf(buf, 0, numRead);
-            fileData.append(readData);
-        }
-        reader.close();
-        return fileData.toString();
-    }
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

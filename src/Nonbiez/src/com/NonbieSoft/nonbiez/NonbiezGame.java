@@ -25,7 +25,7 @@ public class NonbiezGame implements ApplicationListener {
 	private PathFindingSystem pathfindingSystem;
 	
 	private Entity player1;
-	
+	private TileMapComponent tileMap;
 	@Override
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
@@ -47,7 +47,9 @@ public class NonbiezGame implements ApplicationListener {
 		//testies
 		Entity map1 = em.createEntity("quotes", "yep");
 		
-		map1.addComponent(new TileMapComponent("testmap1.json"));
+		tileMap = (TileMapComponent) map1.addComponent(new TileMapComponent("data/testmap1.json"));
+		
+		tileMap.addTileSetImage("terrain.png", "data/terrain.png");
 	}
 	
 	public Entity spawnPlayer() {
@@ -77,6 +79,12 @@ public class NonbiezGame implements ApplicationListener {
 		
 		return player;
 	}
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public void dispose() {
@@ -105,6 +113,10 @@ public class NonbiezGame implements ApplicationListener {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
+		
+		// see the magic
+		tileMap.render(camera);
+		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		

@@ -34,10 +34,6 @@
          "y":0
         }],
  "orientation":"staggered",
- "properties":
-    {
-
-    },
  "tileheight":32,
  "tilesets":[
         {
@@ -47,10 +43,6 @@
          "imagewidth":640,
          "margin":0,
          "name":"Terrain",
-         "properties":
-            {
-
-            },
          "spacing":0,
          "tileheight":32,
          "tilewidth":64
